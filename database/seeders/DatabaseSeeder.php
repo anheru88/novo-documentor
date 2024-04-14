@@ -3,8 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,11 +14,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $this->call([
+        ]);
 
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'name' => 'Angel Jimenez Escobar',
+            'email' => 'ajimenezescobar@gmail.com',
+            'password' => '$2y$12$Zv0C888tGSo.zjt6Vd9EOOEFLevRCSNt0vAA0HF5KfPkn9/9qZQK.',
+            'remember_token' => 'GnjrRSzUqm',
         ]);
     }
 }
