@@ -2,9 +2,11 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Field\TinyEditor;
 use App\Filament\Resources\ContractResource\Pages;
 use App\Filament\Resources\ContractResource\RelationManagers;
 use App\Models\Contract;
+use App\Models\Variable;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -21,14 +23,41 @@ class ContractResource extends Resource
 
     public static function form(Form $form): Form
     {
+        $variables = Variable::select('title', 'value')->where('active', true)->get()->toArray();
+
         return $form
             ->schema([
-                Forms\Components\Textarea::make('contract')
+                Forms\Components\TextInput::make('name')
                     ->required()
-                    ->columnSpanFull(),
+                    ->maxLength(255),
+                TinyEditor::make('contract')
+                    ->fileAttachmentsDisk('public')
+                    ->fileAttachmentsVisibility('public')
+                    ->fileAttachmentsDirectory('uploads')
+                    ->profile('default')
+                    ->columnSpan('full')
+                    ->maxHeight(500)
+                    ->required()
+                    ->reactive()
+                    ->setCustomConfigs(
+                        [
+                            'mergetags_prefix' => '{{',
+                            'mergetags_suffix' => '}}',
+                            'mergetags_list'   => $variables,
+                        ]
+                    )
+                    ->afterStateUpdated(function ($state, callable $set) {
+                        //Define un patrón de expresión regular para encontrar las variables entre corchetes
+                        $patron = "/\{\{[a-zA-Z]+\}\}/";
+
+                        // Encuentra todas las coincidencias de variables en el texto
+                        preg_match_all($patron, $state, $coincidencias);
+
+                        // agrega los valores de las variables al arreglo
+                        $set('variables', array_unique($coincidencias));
+                    }),
                 Forms\Components\Textarea::make('variables')
                     ->disabled()
-                    ->required()
                     ->columnSpanFull(),
             ]);
     }
@@ -37,6 +66,8 @@ class ContractResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('name')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
