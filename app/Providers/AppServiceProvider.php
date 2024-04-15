@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use AmidEsfahani\FilamentTinyEditor\TinyeditorServiceProvider;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

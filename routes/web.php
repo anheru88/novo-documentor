@@ -7,7 +7,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('generate-contract-template-pdf/{id}' , GenerateContractTemplatePdfController::class)
+Route::get('generate-contract-template-pdf/{id}', GenerateContractTemplatePdfController::class)
     ->name('generate-contract-template-pdf');
-
-

@@ -5,13 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Variable extends Model
+class Template extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'title',
-        'value',
-        'active',
+        'name',
+        'contract',
+        'variables',
+    ];
+
+    protected $casts = [
+        'variables' => 'array',
     ];
 }

@@ -3,8 +3,8 @@
 namespace App\Filament\Resources;
 
 use AmidEsfahani\FilamentTinyEditor\TinyEditor;
-use App\Filament\Resources\ContractResource\Pages;
-use App\Models\Contract;
+use App\Filament\Resources\TemplateResource\Pages;
+use App\Models\Template;
 use App\Models\Variable;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -12,9 +12,9 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 
-class ContractResource extends Resource
+class TemplateResource extends Resource
 {
-    protected static ?string $model = Contract::class;
+    protected static ?string $model = Template::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -55,7 +55,6 @@ class ContractResource extends Resource
                         $set('variables', array_unique($coincidencias[0]));
                     }),
                 Forms\Components\Textarea::make('variables')
-                    ->disabled()
                     ->columnSpanFull(),
             ]);
     }
@@ -83,7 +82,7 @@ class ContractResource extends Resource
                     ->color('success')
                     ->icon('heroicon-o-document-arrow-down')
                     ->url(
-                        fn (Contract $contract): string => route('generate-contract-template-pdf',
+                        fn (Template $contract): string => route('generate-contract-template-pdf',
                             ['id' => $contract->id]),
                         shouldOpenInNewTab: true
                     ),
@@ -112,7 +111,7 @@ class ContractResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManageContracts::route('/'),
+            'index' => Pages\ManageTemplates::route('/'),
         ];
     }
 }
