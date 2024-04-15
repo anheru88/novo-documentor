@@ -12,7 +12,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Support\Facades\App;
+use PDF;
 
 
 class ContractResource extends Resource
@@ -34,11 +34,12 @@ class ContractResource extends Resource
                     ->fileAttachmentsDisk('public')
                     ->fileAttachmentsVisibility('public')
                     ->fileAttachmentsDirectory('uploads')
-                    ->profile('default')
+                    ->profile('full')
                     ->columnSpan('full')
                     ->maxHeight(450)
                     ->required()
                     ->reactive()
+                    ->showMenuBar()
                     ->setCustomConfigs(
                         [
                             'mergetags_prefix' => '{{',
@@ -54,11 +55,10 @@ class ContractResource extends Resource
                         preg_match_all($patron, $state, $coincidencias);
 
                         // agrega los valores de las variables al arreglo
-                        $set('variables', array_unique($coincidencias));
+                        $set('variables', array_unique($coincidencias[0]));
                     }),
                 Forms\Components\Textarea::make('variables')
                     ->disabled()
-                    ->required()
                     ->columnSpanFull(),
             ]);
     }
@@ -85,18 +85,11 @@ class ContractResource extends Resource
                 Tables\Actions\Action::make('download')
                     ->color('success')
                     ->icon('heroicon-o-document-arrow-down')
-                    ->url(function (Contract $contract) {
-
-//                        $pdf = App::make('dompdf.wrapper');
-//                        $pdf->loadHTML('<h1>Styde.net</h1>');
-//                        return $pdf->stream('mi-archivo.pdf');
-
-
-//                        $pdf = PDF::loadHTML('<h1>hello world</h1>')->setOptions(['defaultFont' => 'sans-serif']);
-//                        $pdf->render();
-//                        return $pdf->stream('pdf_file.pdf');
-                    }),
-
+                    ->url(
+                        fn(Contract $contract): string => route('generate-contract-template-pdf',
+                            ['id' => $contract->id]),
+                        shouldOpenInNewTab: true
+                    ),
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make()
                     ->mutateFormDataUsing(function (array $data): array {
@@ -106,7 +99,7 @@ class ContractResource extends Resource
                         // Encuentra todas las coincidencias de variables en el texto
                         preg_match_all($patron, $data['contract'], $coincidencias);
 
-                        $data['variables'] = array_unique($coincidencias);
+                        $data['variables'] = array_unique($coincidencias[0]);
 
                         return $data;
                     }),

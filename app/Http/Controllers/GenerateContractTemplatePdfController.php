@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contract;
-use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use PDF;
 
 class GenerateContractTemplatePdfController extends Controller
 {
@@ -14,9 +14,8 @@ class GenerateContractTemplatePdfController extends Controller
     public function __invoke(Request $request, int $id)
     {
         $contract = Contract::findOrFail($id);
-
-        $pdf = Pdf::loadView('contract', $contract);
-        return $pdf->download('invoice.pdf');
+        $pdf = PDF::loadView('contract', $contract);
+        return $pdf->stream('contract-'.$contract->name.'.pdf');
 
     }
 }

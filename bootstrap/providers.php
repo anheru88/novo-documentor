@@ -1,7 +1,7 @@
 <?php
 
 return [
+    App\Providers\AliasServiceProvider::class,
     App\Providers\AppServiceProvider::class,
     App\Providers\Filament\SuperAdminPanelProvider::class,
-    App\Providers\MyTinyEditorServiceProvider::class,
 ];

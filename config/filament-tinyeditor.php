@@ -19,10 +19,10 @@ return [
     /** cutsom */
     'skins' => [
         // oxide, oxide-dark, tinymce-5, tinymce-5-dark
-        'ui' => 'oxide',
+        'ui' => 'oxide-dark',
 
         // dark, default, document, tinymce-5, tinymce-5-dark, writer
-        'content' => 'default'
+        'content' => 'document'
     ],
 
     'profiles' => [
@@ -45,8 +45,8 @@ return [
         ],
 
         'full' => [
-            'plugins' => 'accordion autoresize codesample directionality advlist autolink link image lists charmap preview anchor pagebreak searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media table emoticons template help',
-            'toolbar' => 'undo redo removeformat | fontfamily fontsize fontsizeinput font_size_formats styles | bold italic underline | rtl ltr | alignjustify alignright aligncenter alignleft | numlist bullist outdent indent accordion | forecolor backcolor | blockquote table toc hr | image link anchor media codesample emoticons | visualblocks print preview wordcount fullscreen help',
+            'plugins' => 'accordion autoresize codesample directionality advlist autolink link image lists charmap preview anchor pagebreak searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media table emoticons template help | mergetags code',
+            'toolbar' => 'undo redo removeformat | fontfamily fontsize fontsizeinput font_size_formats styles | bold italic underline | rtl ltr | alignjustify alignright aligncenter alignleft | numlist bullist outdent indent accordion | forecolor backcolor | blockquote table toc hr | image link anchor media codesample emoticons | visualblocks print preview wordcount fullscreen help | mergetags code',
             'upload_directory' => null,
         ],
     ],

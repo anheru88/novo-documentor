@@ -21,7 +21,7 @@ class ManageContracts extends ManageRecords
                     // Encuentra todas las coincidencias de variables en el texto
                     preg_match_all($patron, $data['contract'], $coincidencias);
 
-                    $data['variables'] = array_unique($coincidencias);
+                    $data['variables'] = array_unique($coincidencias[0]);
 
                     return $data;
                 }),
