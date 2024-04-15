@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Field\TinyEditor;
+use AmidEsfahani\FilamentTinyEditor\TinyEditor;
 use App\Filament\Resources\ContractResource\Pages;
 use App\Filament\Resources\ContractResource\RelationManagers;
 use App\Models\Contract;
@@ -12,8 +12,8 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\App;
+
 
 class ContractResource extends Resource
 {
@@ -36,7 +36,7 @@ class ContractResource extends Resource
                     ->fileAttachmentsDirectory('uploads')
                     ->profile('default')
                     ->columnSpan('full')
-                    ->maxHeight(500)
+                    ->maxHeight(450)
                     ->required()
                     ->reactive()
                     ->setCustomConfigs(
@@ -48,7 +48,7 @@ class ContractResource extends Resource
                     )
                     ->afterStateUpdated(function ($state, callable $set) {
                         //Define un patrón de expresión regular para encontrar las variables entre corchetes
-                        $patron = "/\{\{[a-zA-Z]+\}\}/";
+                        $patron = "/\{\{[a-zA-Z_áéíóúÁÉÍÓÚñÑ\-\s]+\}\}/u";
 
                         // Encuentra todas las coincidencias de variables en el texto
                         preg_match_all($patron, $state, $coincidencias);
@@ -58,6 +58,7 @@ class ContractResource extends Resource
                     }),
                 Forms\Components\Textarea::make('variables')
                     ->disabled()
+                    ->required()
                     ->columnSpanFull(),
             ]);
     }
@@ -81,8 +82,34 @@ class ContractResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\Action::make('download')
+                    ->color('success')
+                    ->icon('heroicon-o-document-arrow-down')
+                    ->url(function (Contract $contract) {
+
+//                        $pdf = App::make('dompdf.wrapper');
+//                        $pdf->loadHTML('<h1>Styde.net</h1>');
+//                        return $pdf->stream('mi-archivo.pdf');
+
+
+//                        $pdf = PDF::loadHTML('<h1>hello world</h1>')->setOptions(['defaultFont' => 'sans-serif']);
+//                        $pdf->render();
+//                        return $pdf->stream('pdf_file.pdf');
+                    }),
+
                 Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->mutateFormDataUsing(function (array $data): array {
+                        //Define un patrón de expresión regular para encontrar las variables entre corchetes
+                        $patron = "/\{\{[a-zA-Z_áéíóúÁÉÍÓÚñÑ\-\s]+\}\}/u";
+
+                        // Encuentra todas las coincidencias de variables en el texto
+                        preg_match_all($patron, $data['contract'], $coincidencias);
+
+                        $data['variables'] = array_unique($coincidencias);
+
+                        return $data;
+                    }),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([

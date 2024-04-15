@@ -4,30 +4,31 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f8105418aa0886ece2313a525c3d856d",
+    "content-hash": "5249067000ea7877afafff8e5e76caae",
     "packages": [
         {
             "name": "amidesfahani/filament-tinyeditor",
-            "version": "v2.0.0",
+            "version": "dev-develop",
             "source": {
                 "type": "git",
-                "url": "https://github.com/amidesfahani/filament-tinyeditor.git",
-                "reference": "45c661fd9cf52ab412c649886bdd074d372a0eaa"
+                "url": "https://github.com/anheru88/filament-tinyeditor.git",
+                "reference": "3fc65586c79a6777c1c7e5f93542ab0a17eb9074"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amidesfahani/filament-tinyeditor/zipball/45c661fd9cf52ab412c649886bdd074d372a0eaa",
-                "reference": "45c661fd9cf52ab412c649886bdd074d372a0eaa",
+                "url": "https://api.github.com/repos/anheru88/filament-tinyeditor/zipball/3fc65586c79a6777c1c7e5f93542ab0a17eb9074",
+                "reference": "3fc65586c79a6777c1c7e5f93542ab0a17eb9074",
                 "shasum": ""
             },
             "require": {
                 "php": "^8.1",
                 "spatie/laravel-package-tools": "^1.16",
-                "tinymce/tinymce": "^6.7"
+                "tinymce/tinymce": "^7.0.0"
             },
             "require-dev": {
                 "laravel/pint": "^1.13"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -41,7 +42,6 @@
                     "AmidEsfahani\\FilamentTinyEditor\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -59,10 +59,9 @@
                 "tinymce"
             ],
             "support": {
-                "issues": "https://github.com/amidesfahani/filament-tinyeditor/issues",
-                "source": "https://github.com/amidesfahani/filament-tinyeditor/tree/v2.0.0"
+                "source": "https://github.com/anheru88/filament-tinyeditor/tree/develop"
             },
-            "time": "2024-04-13T00:05:40+00:00"
+            "time": "2024-04-15T02:31:59+00:00"
         },
         {
             "name": "anourvalar/eloquent-serialize",
@@ -7728,16 +7727,16 @@
         },
         {
             "name": "tinymce/tinymce",
-            "version": "6.8.3",
+            "version": "7.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tinymce/tinymce-dist.git",
-                "reference": "01d1959b1200e0b872ea078e59ea5abfb5c54100"
+                "reference": "863759766e2397d1f639c63d006680a9e8ba6233"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tinymce/tinymce-dist/zipball/01d1959b1200e0b872ea078e59ea5abfb5c54100",
-                "reference": "01d1959b1200e0b872ea078e59ea5abfb5c54100",
+                "url": "https://api.github.com/repos/tinymce/tinymce-dist/zipball/863759766e2397d1f639c63d006680a9e8ba6233",
+                "reference": "863759766e2397d1f639c63d006680a9e8ba6233",
                 "shasum": ""
             },
             "type": "component",
@@ -7762,7 +7761,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "MIT-only"
+                "GPL-2.0-or-later"
             ],
             "description": "Web based JavaScript HTML WYSIWYG editor control.",
             "homepage": "https://www.tiny.cloud/",
@@ -7781,9 +7780,9 @@
                 "wysiwyg"
             ],
             "support": {
-                "source": "https://github.com/tinymce/tinymce-dist/tree/6.8.3"
+                "source": "https://github.com/tinymce/tinymce-dist/tree/7.0.1"
             },
-            "time": "2024-02-08T23:33:30+00:00"
+            "time": "2024-04-10T07:29:34+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -10450,7 +10449,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "amidesfahani/filament-tinyeditor": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

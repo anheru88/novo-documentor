@@ -13,7 +13,18 @@ class ManageContracts extends ManageRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()
+                ->mutateFormDataUsing(function (array $data): array {
+                    //Define un patrón de expresión regular para encontrar las variables entre corchetes
+                    $patron = "/\{\{[a-zA-Z_áéíóúÁÉÍÓÚñÑ\-\s]+\}\}/u";
+
+                    // Encuentra todas las coincidencias de variables en el texto
+                    preg_match_all($patron, $data['contract'], $coincidencias);
+
+                    $data['variables'] = array_unique($coincidencias);
+
+                    return $data;
+                }),
         ];
     }
 }

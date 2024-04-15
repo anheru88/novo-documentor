@@ -4,9 +4,15 @@
     "description": "The skeleton application for the Laravel framework.",
     "keywords": ["laravel", "framework"],
     "license": "MIT",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/anheru88/filament-tinyeditor.git"
+        }
+    ],
     "require": {
         "php": "^8.2",
-        "amidesfahani/filament-tinyeditor": "^2.0",
+        "amidesfahani/filament-tinyeditor": "dev-develop",
         "bezhansalleh/filament-shield": "^3.2",
         "filament/filament": "^3.2",
         "laravel/framework": "^11.0",
